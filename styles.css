@@ -44,7 +44,7 @@ html,body{background:var(--paper)}h1{font-size:92px}h2{font-size:38px}
 @media(max-width:500px){h1{font-size:60px}.latency-row{grid-template-columns:96px 1fr 70px}.fps-axis{margin-left:104px;margin-right:78px}.nav-links{gap:10px}.theme-toggle{width:24px}.flow-output-label{font-size:8px;max-width:60%}.score-row{font-size:12px}.score-heading{font-size:10px}}
 
 .media-toolbar{display:flex;justify-content:flex-end;padding:4px 0;gap:8px}
-.instance-reel{position:relative}.instance-playback{position:absolute;top:0;right:4px;z-index:2;padding:0}
+.instance-reel{position:relative;padding-bottom:36px}.instance-playback{position:absolute;bottom:2px;right:4px;z-index:2;padding:0}
 .playback-toggle{display:grid;place-items:center;width:32px;height:32px;flex:none;padding:6px;border:1px solid var(--line);border-radius:3px;background:var(--paper);cursor:pointer;color:var(--ink)}
 .playback-toggle img{width:18px;height:18px;background:transparent}
 .playback-toggle:hover{border-color:var(--blue)}
