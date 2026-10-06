@@ -334,7 +334,7 @@ function setupFlowExamples(items){
 }
 
 async function init(){
-  const [assetsResponse,contentResponse]=await Promise.all([fetch('data/assets.json'),fetch('data/content.json')]);
+  const [assetsResponse,contentResponse]=await Promise.all([fetch('data/assets.json',{cache:'no-cache'}),fetch('data/content.json',{cache:'no-cache'})]);
   if(!assetsResponse.ok||!contentResponse.ok)throw new Error('Site manifests unavailable');
   const [assets,content]=await Promise.all([assetsResponse.json(),contentResponse.json()]);
   if(assets.publication?.labMedia==='withheld'){
