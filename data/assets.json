@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "main": {
-    "available": false,
+    "available": true,
     "src": "assets/video/main.mp4",
     "poster": "assets/images/main-poster.webp",
     "width": 1280,
@@ -2174,6 +2174,13 @@
   ],
   "tracking": [
     {
+      "label": "High motion",
+      "src": "assets/video/tracking-high-motion.mp4",
+      "poster": "assets/video/tracking-high-motion-poster.webp",
+      "continuous": true,
+      "durationSeconds": 7.959
+    },
+    {
       "label": "HO3D Mug",
       "src": "assets/video/tracking-handheld-mug.mp4",
       "poster": "assets/video/tracking-handheld-mug-poster.webp",
@@ -2426,8 +2433,145 @@
       }
     }
   ],
-  "grasping": [],
+  "grasping": [
+    {
+      "label": "Mug",
+      "src": "assets/video/grasp-dynamic-mug.mp4",
+      "poster": "assets/video/grasp-dynamic-mug-poster.webp",
+      "continuous": true,
+      "columns": [
+        "RGB",
+        "Geometry"
+      ],
+      "durationSeconds": 7.5,
+      "graspOverlay": false,
+      "provenance": {
+        "intervalSeconds": [
+          10.5,
+          18.0
+        ],
+        "fps": 24,
+        "sourceVideo": {
+          "width": 1280,
+          "height": 720,
+          "fps": 10.00957927018366,
+          "frames": 657,
+          "duration": 65.638
+        },
+        "geometryProcessing": {
+          "frameCount": 657,
+          "fps": 10.00957927018366,
+          "maxChangedPixelFraction": 5.425347222222222e-05,
+          "changedPixels": 548,
+          "method": "reserved yellow-orange glyph removal on archived geometry only"
+        },
+        "synchronization": "same recorded ROS timestamp per source frame"
+      }
+    },
+    {
+      "label": "Bottle",
+      "src": "assets/video/grasp-bottle.mp4",
+      "poster": "assets/video/grasp-bottle-poster.webp",
+      "continuous": true,
+      "columns": [
+        "RGB",
+        "Geometry"
+      ],
+      "durationSeconds": 8.0,
+      "graspOverlay": false,
+      "provenance": {
+        "intervalSeconds": [
+          7.1,
+          15.1
+        ],
+        "fps": 24,
+        "sourceVideo": {
+          "width": 1280,
+          "height": 720,
+          "fps": 10.005448469984033,
+          "frames": 262,
+          "duration": 26.186
+        },
+        "geometryProcessing": {
+          "frameCount": 262,
+          "fps": 10.005448469984033,
+          "maxChangedPixelFraction": 0.0007736545138888889,
+          "changedPixels": 108073,
+          "method": "reserved yellow-orange glyph removal on archived geometry only"
+        },
+        "synchronization": "same recorded ROS timestamp per source frame"
+      }
+    },
+    {
+      "label": "Bowl",
+      "src": "assets/video/grasp-bowl.mp4",
+      "poster": "assets/video/grasp-bowl-poster.webp",
+      "continuous": true,
+      "columns": [
+        "RGB",
+        "Geometry"
+      ],
+      "durationSeconds": 8.0,
+      "graspOverlay": false,
+      "provenance": {
+        "intervalSeconds": [
+          6.1,
+          14.1
+        ],
+        "fps": 24,
+        "sourceVideo": {
+          "width": 1280,
+          "height": 720,
+          "fps": 10.00096334014376,
+          "frames": 230,
+          "duration": 22.998
+        },
+        "geometryProcessing": {
+          "frameCount": 230,
+          "fps": 10.00096334014376,
+          "maxChangedPixelFraction": 0.0020421006944444445,
+          "changedPixels": 278788,
+          "method": "reserved yellow-orange glyph removal on archived geometry only"
+        },
+        "synchronization": "same recorded ROS timestamp per source frame"
+      }
+    },
+    {
+      "label": "Banana",
+      "src": "assets/video/grasp-banana.mp4",
+      "poster": "assets/video/grasp-banana-poster.webp",
+      "continuous": true,
+      "columns": [
+        "RGB",
+        "Geometry"
+      ],
+      "durationSeconds": 8.0,
+      "graspOverlay": false,
+      "provenance": {
+        "intervalSeconds": [
+          8.1,
+          16.1
+        ],
+        "fps": 24,
+        "sourceVideo": {
+          "width": 1280,
+          "height": 720,
+          "fps": 10.002585170115433,
+          "frames": 229,
+          "duration": 22.895
+        },
+        "geometryProcessing": {
+          "frameCount": 229,
+          "fps": 10.002585170115433,
+          "maxChangedPixelFraction": 0.0010026041666666666,
+          "changedPixels": 98828,
+          "method": "reserved yellow-orange glyph removal on archived geometry only"
+        },
+        "synchronization": "same recorded ROS timestamp per source frame"
+      }
+    }
+  ],
   "publication": {
-    "labMedia": "withheld"
+    "labMedia": "included"
   }
 }
