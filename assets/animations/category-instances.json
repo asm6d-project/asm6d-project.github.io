@@ -1,0 +1,353 @@
+{
+  "schema": 1,
+  "categories": [
+    {
+      "class_id": 7,
+      "label": "bottle",
+      "instance_ids": [
+        "phocal-bottle_020",
+        "phocal-bottle_005",
+        "phocal-bottle_015",
+        "google_scan-bottle_0011"
+      ],
+      "selection": "farthest-point sampling in centered normalized shape space",
+      "alignmentThresholds": {
+        "pointToMeshMedian": 0.015,
+        "pointToMeshP95": 0.05
+      },
+      "alignment": [
+        {
+          "pointToMeshMedian": 0.0047476966442510145,
+          "pointToMeshP95": 0.008224761448600454,
+          "meshToPointMedian": 0.026673135476678645
+        },
+        {
+          "pointToMeshMedian": 0.002334439503926285,
+          "pointToMeshP95": 0.003718618192355144,
+          "meshToPointMedian": 0.013451738916759305
+        },
+        {
+          "pointToMeshMedian": 0.0024816932328065614,
+          "pointToMeshP95": 0.004114844551390105,
+          "meshToPointMedian": 0.014502219646893227
+        },
+        {
+          "pointToMeshMedian": 0.012872192133482546,
+          "pointToMeshP95": 0.03657400048736618,
+          "meshToPointMedian": 0.023846247614169872
+        }
+      ],
+      "layout": {
+        "panelSize": [
+          480,
+          520
+        ],
+        "columns": 4,
+        "projectedOccupancy": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "projectedCentersPx": [
+          240.0,
+          720.0,
+          1200.0,
+          1680.0
+        ]
+      },
+      "video": "instances-bottle.mp4",
+      "poster": "instances-bottle-poster.webp"
+    },
+    {
+      "class_id": 18,
+      "label": "camera",
+      "instance_ids": [
+        "real-camera_011",
+        "real-camera_003",
+        "real-camera_007",
+        "real-camera_024"
+      ],
+      "selection": "farthest-point sampling in centered normalized shape space",
+      "alignmentThresholds": {
+        "pointToMeshMedian": 0.015,
+        "pointToMeshP95": 0.05
+      },
+      "alignment": [
+        {
+          "pointToMeshMedian": 0.005734281842346324,
+          "pointToMeshP95": 0.018852432329847266,
+          "meshToPointMedian": 0.023436267592266163
+        },
+        {
+          "pointToMeshMedian": 0.005170850327354861,
+          "pointToMeshP95": 0.0152943447654157,
+          "meshToPointMedian": 0.0219668434070847
+        },
+        {
+          "pointToMeshMedian": 0.0050827590612132515,
+          "pointToMeshP95": 0.015072159717682932,
+          "meshToPointMedian": 0.022406088196140487
+        },
+        {
+          "pointToMeshMedian": 0.0060091393952889875,
+          "pointToMeshP95": 0.021229770340905063,
+          "meshToPointMedian": 0.02707850615818209
+        }
+      ],
+      "layout": {
+        "panelSize": [
+          480,
+          520
+        ],
+        "columns": 4,
+        "projectedOccupancy": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "projectedCentersPx": [
+          240.0,
+          720.0,
+          1200.0,
+          1680.0
+        ]
+      },
+      "video": "instances-camera.mp4",
+      "poster": "instances-camera-poster.webp"
+    },
+    {
+      "class_id": 19,
+      "label": "can",
+      "instance_ids": [
+        "phocal-can_021",
+        "omniobject3d-can_002",
+        "phocal-can_011",
+        "phocal-can_019"
+      ],
+      "selection": "farthest-point sampling in centered normalized shape space",
+      "alignmentThresholds": {
+        "pointToMeshMedian": 0.015,
+        "pointToMeshP95": 0.05
+      },
+      "alignment": [
+        {
+          "pointToMeshMedian": 0.004129749012677885,
+          "pointToMeshP95": 0.006669807275169054,
+          "meshToPointMedian": 0.022395774560879628
+        },
+        {
+          "pointToMeshMedian": 0.0042598242948652665,
+          "pointToMeshP95": 0.009251428549192435,
+          "meshToPointMedian": 0.01895116914252095
+        },
+        {
+          "pointToMeshMedian": 0.0071684540081764885,
+          "pointToMeshP95": 0.011920134979862978,
+          "meshToPointMedian": 0.03141119176052223
+        },
+        {
+          "pointToMeshMedian": 0.005782832845010634,
+          "pointToMeshP95": 0.010517818039697785,
+          "meshToPointMedian": 0.02756745534947623
+        }
+      ],
+      "layout": {
+        "panelSize": [
+          480,
+          520
+        ],
+        "columns": 4,
+        "projectedOccupancy": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "projectedCentersPx": [
+          240.0,
+          720.0,
+          1200.0,
+          1680.0
+        ]
+      },
+      "video": "instances-can.mp4",
+      "poster": "instances-can-poster.webp"
+    },
+    {
+      "class_id": 23,
+      "label": "chair",
+      "instance_ids": [
+        "omniobject3d-chair_020",
+        "omniobject3d-chair_023",
+        "omniobject3d-chair_014",
+        "omniobject3d-chair_007"
+      ],
+      "selection": "farthest-point sampling in centered normalized shape space",
+      "alignmentThresholds": {
+        "pointToMeshMedian": 0.015,
+        "pointToMeshP95": 0.05
+      },
+      "alignment": [
+        {
+          "pointToMeshMedian": 0.005422654655872494,
+          "pointToMeshP95": 0.0136881957843965,
+          "meshToPointMedian": 0.017737289021174236
+        },
+        {
+          "pointToMeshMedian": 0.006372106028596212,
+          "pointToMeshP95": 0.01829371672679973,
+          "meshToPointMedian": 0.02040348844033258
+        },
+        {
+          "pointToMeshMedian": 0.0049186095319471955,
+          "pointToMeshP95": 0.01812054817858836,
+          "meshToPointMedian": 0.015403770981818712
+        },
+        {
+          "pointToMeshMedian": 0.0063132162298995195,
+          "pointToMeshP95": 0.013349243643548243,
+          "meshToPointMedian": 0.016748188553915907
+        }
+      ],
+      "layout": {
+        "panelSize": [
+          480,
+          520
+        ],
+        "columns": 4,
+        "projectedOccupancy": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "projectedCentersPx": [
+          240.0,
+          720.0,
+          1200.0,
+          1680.0
+        ]
+      },
+      "video": "instances-chair.mp4",
+      "poster": "instances-chair-poster.webp"
+    },
+    {
+      "class_id": 73,
+      "label": "laptop",
+      "instance_ids": [
+        "omniobject3d-laptop_001",
+        "real-laptop_014",
+        "real-laptop_005",
+        "real-laptop_002"
+      ],
+      "selection": "farthest-point sampling in centered normalized shape space",
+      "alignmentThresholds": {
+        "pointToMeshMedian": 0.015,
+        "pointToMeshP95": 0.05
+      },
+      "alignment": [
+        {
+          "pointToMeshMedian": 0.003738097870441431,
+          "pointToMeshP95": 0.006679286549922233,
+          "meshToPointMedian": 0.01864846556029625
+        },
+        {
+          "pointToMeshMedian": 0.00626264643662299,
+          "pointToMeshP95": 0.014902020669296221,
+          "meshToPointMedian": 0.025032690078863096
+        },
+        {
+          "pointToMeshMedian": 0.008544548002253424,
+          "pointToMeshP95": 0.02031355648361527,
+          "meshToPointMedian": 0.025327387223758793
+        },
+        {
+          "pointToMeshMedian": 0.009297117367982454,
+          "pointToMeshP95": 0.022603475471248472,
+          "meshToPointMedian": 0.02448119735465737
+        }
+      ],
+      "layout": {
+        "panelSize": [
+          480,
+          520
+        ],
+        "columns": 4,
+        "projectedOccupancy": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "projectedCentersPx": [
+          240.0,
+          720.0,
+          1200.0,
+          1680.0
+        ]
+      },
+      "video": "instances-laptop.mp4",
+      "poster": "instances-laptop-poster.webp"
+    },
+    {
+      "class_id": 86,
+      "label": "mug",
+      "instance_ids": [
+        "phocal-mug_027",
+        "phocal-mug_021",
+        "phocal-mug_013",
+        "phocal-mug_026"
+      ],
+      "selection": "farthest-point sampling in centered normalized shape space",
+      "alignmentThresholds": {
+        "pointToMeshMedian": 0.015,
+        "pointToMeshP95": 0.05
+      },
+      "alignment": [
+        {
+          "pointToMeshMedian": 0.006811539612056893,
+          "pointToMeshP95": 0.010986284539298756,
+          "meshToPointMedian": 0.020946023462959696
+        },
+        {
+          "pointToMeshMedian": 0.008012596738989408,
+          "pointToMeshP95": 0.018301581228434442,
+          "meshToPointMedian": 0.029752110184971564
+        },
+        {
+          "pointToMeshMedian": 0.006493588253077848,
+          "pointToMeshP95": 0.018562571188602172,
+          "meshToPointMedian": 0.02709799379528755
+        },
+        {
+          "pointToMeshMedian": 0.005821586806785453,
+          "pointToMeshP95": 0.010808156808303774,
+          "meshToPointMedian": 0.025614974841199414
+        }
+      ],
+      "layout": {
+        "panelSize": [
+          480,
+          520
+        ],
+        "columns": 4,
+        "projectedOccupancy": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "projectedCentersPx": [
+          240.0,
+          720.0,
+          1200.0,
+          1680.0
+        ]
+      },
+      "video": "instances-mug.mp4",
+      "poster": "instances-mug-poster.webp"
+    }
+  ]
+}

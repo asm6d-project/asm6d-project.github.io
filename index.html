@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ASM-6D estimates complete object shape and 6D pose from one RGB-D observation.">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="ASM-6D">
+  <meta property="og:description" content="Joint pose-shape inference with complete correspondence flow maps.">
+  <meta property="og:image" content="assets/images/social-card.webp">
+  <title>ASM-6D</title>
+  <link rel="icon" href="data:,">
+  <link rel="preload" href="assets/fonts/PlusJakartaSans-Variable.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="assets/images/main-poster.webp" as="image" type="image/webp" fetchpriority="high">
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header"><nav class="wrap nav" aria-label="Primary navigation">
+    <a class="wordmark" href="#top">ASM-6D</a>
+    <div class="nav-links"><a href="#method">Method</a><a href="#eval">Eval</a><a href="#geometry">Geometry</a><a href="#applications">Applications</a><button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to dark reading mode" aria-pressed="false" title="Dark reading mode">☾</button></div>
+  </nav></header>
+
+  <main id="main">
+    <section class="hero wrap" id="top">
+      <h1>ASM-6D</h1>
+      <div class="hero-line">
+        <p class="subtitle">Fast Certified Joint Pose-Shape Inference with Complete Correspondence Flow Maps</p>
+        <p class="lede">From one RGB-D crop, ASM-6D samples complete indexed geometry and fits an active shape model to recover instance shape, metric scale, and 6D pose, with or without a category label.</p>
+      </div>
+      <div class="actions" aria-label="Project resources"><span class="button quiet" aria-disabled="true">Paper · soon</span><span class="button quiet" aria-disabled="true">Code · soon</span></div>
+      <div class="main-video" id="main-video-shell">
+        <video id="main-video" controls muted playsinline preload="metadata" poster="assets/images/main-poster.webp" aria-label="ASM-6D project video"></video>
+        <div class="video-placeholder" id="main-video-placeholder"><span>Main video coming soon</span></div>
+      </div>
+    </section>
+
+    <section class="section wrap" id="method">
+      <header class="section-heading"><p class="eyebrow">Method</p><h2>A correspondence-first route to shape and pose.</h2><p>Generation and optimization share the same 642 point identities.</p></header>
+      <ol class="method-steps" aria-label="ASM-6D method stages">
+        <li><span>1</span><div><strong>Standardize</strong><p>Shared point identities create category shape models.</p></div></li>
+        <li><span>2</span><div><strong>Complete</strong><p>Conditional flow samples plausible complete correspondences.</p></div></li>
+        <li><span>3</span><div><strong>Fit</strong><p>Geometry selects shape, scale, category, and 6D pose.</p></div></li>
+      </ol>
+      <figure class="method-overview" id="method-overview" hidden><img alt="ASM-6D method overview"><figcaption>A replaceable overview of the complete inference pipeline.</figcaption></figure>
+
+      <article class="template-explorer">
+        <div class="subhead"><div><h3>Build a shape library</h3><p>Shared coordinates turn instance variation into compact category models.</p></div><p class="microcopy">Four standardized instances per category.</p></div>
+        <div class="template-grid" id="template-grid" role="tablist" aria-label="ASM category"></div>
+        <div class="instance-reel" id="instance-reel" hidden>
+          <div class="column-labels four"><span>Instance 1</span><span>Instance 2</span><span>Instance 3</span><span>Instance 4</span></div>
+          <button class="media-button" type="button" aria-label="Pause category instances"><video muted loop playsinline preload="none"></video></button>
+        </div>
+      </article>
+
+      <article class="flow-explorer">
+        <div class="comparison-head"><div><h3>One observation, several completions</h3><p>Eight samples expose plausible geometry hidden by the partial view.</p></div><div class="switches" id="flow-controls" role="tablist" aria-label="Flow completion object"></div></div>
+        <div class="flow-stage">
+          <div class="flow-input" aria-label="RGB-D conditioning input">
+            <div><span>RGB</span><img id="flow-rgb" alt="RGB crop used to condition the flow model"></div>
+            <div><span>Depth</span><img id="flow-depth" alt="Depth crop used to condition the flow model"></div>
+          </div>
+          <div class="flow-output">
+            <div class="flow-output-label">Eight complete hypotheses</div><button id="flow-orbit" class="flow-orbit icon-button-inline" type="button" aria-pressed="false">Explore 3D</button>
+            <button class="media-button flow-media" type="button" aria-label="Play flow animation"><video id="flow-video" data-autoplay muted playsinline preload="none"></video></button>
+            <div id="flow-viewer" class="flow-viewer" hidden><canvas tabindex="0" aria-label="Orbit all eight hypotheses together"></canvas><img class="shape-fallback" alt="Eight flow hypotheses" hidden></div>
+          </div>
+        </div>
+        <div class="media-timeline flow-timeline"><input id="flow-scrubber" type="range" min="0" max="1000" value="0" aria-label="Flow denoising progress"><output for="flow-scrubber">t = 1.00</output></div>
+        <p class="flow-note">Noise is Gaussian in <code>(u, v, log z)</code>, not 3D XYZ. The displayed cloud exponentiates log-depth before camera backprojection.</p>
+      </article>
+    </section>
+
+    <section class="section wrap" id="eval">
+      <header class="section-heading split-heading"><div><p class="eyebrow">Eval</p><h2>Evaluate pose, shape, and category.</h2></div><p>Aggregate comparisons and selected qualitative sequences.</p></header>
+      <div class="metric-strip" id="benchmark-strip"></div>
+
+      <article class="comparison" data-comparison="rope" hidden>
+        <div class="comparison-head"><div><h3>ROPE</h3><p>Paper configuration · selected eight-second sequences</p></div><div class="switches" data-controls role="tablist" aria-label="ROPE scene"></div></div>
+        <div class="column-labels three"><span>Ground truth</span><span>GenPose++</span><span>ASM-6D</span></div>
+        <button class="media-button comparison-media" type="button" aria-label="Pause ROPE comparison"><video data-video data-autoplay muted loop playsinline preload="none"></video></button>
+      </article>
+
+      <article class="comparison" id="housecat-comparison" data-comparison="housecat" hidden>
+        <div class="comparison-head"><div><h3>HouseCat6D</h3><p>SOPE-to-HouseCat6D adaptation · official test scenes</p></div><div class="switches" data-controls role="tablist" aria-label="HouseCat6D scene"></div></div>
+        <div class="column-labels three"><span>RGB</span><span>Ground truth</span><span>ASM-6D</span></div>
+        <button class="media-button comparison-media" type="button" aria-label="Pause HouseCat6D comparison"><video data-video data-autoplay muted loop playsinline preload="none"></video></button>
+      </article>
+
+      <article class="throughput" aria-labelledby="throughput-title">
+        <div class="subhead"><div><h3 id="throughput-title">Throughput</h3><p>End-to-end frames per second per object crop.</p></div><p class="runtime-config">RTX 3090 Ti · two flow steps · hybrid ADMM-20</p></div>
+        <div class="latency-chart" id="latency-chart"></div>
+        <div class="fps-axis" aria-hidden="true"><span>0</span><span>10</span><span>20</span><span>30 FPS</span></div>
+      </article>
+    </section>
+
+    <section class="section wrap" id="geometry">
+      <header class="section-heading split-heading"><div><p class="eyebrow">Geometry</p><h2>More than a pose.</h2></div><p>Measured geometry and two predicted completions.</p></header>
+      <article class="shape-completion">
+        <div class="comparison-head"><div><h3>Shape completion</h3><p>Original GT mesh; native 642-point predictions</p></div><div class="switches" id="shape-controls" role="tablist" aria-label="Shape completion object"></div></div>
+        <div class="shape-toolbar"><button class="icon-button-inline" id="shape-play" type="button" aria-label="Pause automatic rotation">Pause</button><button class="icon-button-inline" id="shape-reset" type="button">Reset view</button><button class="icon-button-inline" id="shape-fullscreen" type="button">Full screen</button></div>
+        <div class="shape-viewer" id="shape-viewer" role="region" aria-label="Synchronized interactive shape completion comparison"><div class="shape-labels"><span>Partial</span><span>Ground truth</span><span>DR-Pose</span><span>ASM-6D</span></div><canvas tabindex="0" aria-label="Synchronized GT mesh and three point clouds"></canvas><img class="shape-fallback" alt="Shape completion comparison" hidden></div>
+      </article>
+
+      <div class="geometry-pair">
+        <article class="compact-study"><div class="study-head"><h3>Shape-conditioned symmetry</h3><p>Occlusion changes the pose distribution.</p></div><div class="switches" id="ambiguity-controls" role="tablist" aria-label="Occlusion condition"></div><button class="media-button" type="button" data-lightbox aria-label="Enlarge pose ambiguity visualization"><img id="ambiguity-image" src="assets/images/ambiguity-self.webp" alt="Shape-conditioned pose distributions"></button></article>
+        <article class="prior-study"><p class="eyebrow">No category label</p><h3>Geometry selects its prior.</h3><p>Each hypothesis is fitted to all 156 ASMs and ranked geometrically.</p><div class="classification-metrics" id="classification-metrics"></div></article>
+      </div>
+    </section>
+
+    <section class="section wrap" id="applications">
+      <header class="section-heading split-heading"><div><p class="eyebrow">Applications</p><h2>Track and grasp recovered geometry.</h2></div><p>Lock shape through time, or pass it directly to grasp planning.</p></header>
+      <article class="comparison" data-comparison="tracking">
+        <div class="comparison-head"><div><h3>Tracking</h3><p>Selected full-frame synchronized excerpts</p></div><div class="switches" data-controls role="tablist" aria-label="Tracking sequence"></div></div>
+        <div class="column-labels three"><span>Ground truth</span><span>ASM-6D</span><span>FoundationPose</span></div>
+        <button class="media-button comparison-media" type="button" aria-label="Pause tracking comparison"><video data-video data-autoplay muted loop playsinline preload="none"></video></button>
+      </article>
+      <article class="comparison" data-comparison="grasping">
+        <div class="comparison-head"><div><h3>Geometry-aware grasping</h3><p>Synchronized camera and robot views</p></div><div class="switches" data-controls role="tablist" aria-label="Grasp sequence"></div></div>
+        <div class="column-labels two"><span>RGB</span><span>Geometry + robot</span></div>
+        <button class="media-button comparison-media" type="button" aria-label="Pause grasping comparison"><video data-video data-autoplay muted loop playsinline preload="none"></video></button>
+      </article>
+    </section>
+  </main>
+
+  <footer class="footer wrap"><p>ASM-6D</p><p>Project page</p></footer>
+  <dialog class="lightbox" id="lightbox" aria-label="Expanded media"><button class="icon-button" type="button" aria-label="Close expanded media">×</button><img alt="Expanded visualization"></dialog>
+</body>
+</html>

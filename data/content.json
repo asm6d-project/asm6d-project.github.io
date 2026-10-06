@@ -1,0 +1,98 @@
+{
+  "comparisons": [
+    {
+      "label": "ROPE",
+      "baseline": "RFMPose",
+      "ours": "ASM-6D",
+      "protocol": "AUC / VUS (%) \u00b7 four-step distilled ASM-6D",
+      "source": "Paper Table I; ROPE pose benchmark",
+      "metrics": [
+        {
+          "label": "IoU25 AUC \u2191",
+          "baseline": 42.1,
+          "ours": 48.96
+        },
+        {
+          "label": "IoU50 AUC \u2191",
+          "baseline": 21.0,
+          "ours": 30.95
+        },
+        {
+          "label": "10\u00b0 / 5 cm VUS \u2191",
+          "baseline": 30.8,
+          "ours": 39.14
+        }
+      ]
+    },
+    {
+      "label": "HouseCat6D",
+      "baseline": "ComPose",
+      "ours": "ASM-6D",
+      "protocol": "Accuracy (%) \u00b7 GT-instance crops \u00b7 SOPE \u2192 HC6D pretraining",
+      "source": "Paper Table III; official HouseCat6D test protocol",
+      "metrics": [
+        {
+          "label": "IoU25 \u2191",
+          "baseline": 90.3,
+          "ours": 95.5
+        },
+        {
+          "label": "IoU50 \u2191",
+          "baseline": 80.6,
+          "ours": 90.7
+        },
+        {
+          "label": "10\u00b0 / 5 cm \u2191",
+          "baseline": 61.5,
+          "ours": 79.7
+        }
+      ]
+    },
+    {
+      "label": "REAL275 shape",
+      "baseline": "DR-Pose",
+      "ours": "ASM-6D raw",
+      "protocol": "14,077 objects \u00b7 detector-inclusive \u00b7 native method inputs",
+      "source": "Frozen REALNOCS native642 summary; paper Table IV",
+      "metrics": [
+        {
+          "label": "CD-L1 (cm) \u2193",
+          "baseline": 1.948,
+          "ours": 1.847
+        },
+        {
+          "label": "HD95 (cm) \u2193",
+          "baseline": 2.323,
+          "ours": 1.995
+        }
+      ]
+    }
+  ],
+  "runtime": [
+    {
+      "label": "Known class \u00b7 K=4",
+      "ms": 33.1,
+      "fps": "30.2"
+    },
+    {
+      "label": "Known class \u00b7 K=40",
+      "ms": 97.4,
+      "fps": "10.3"
+    },
+    {
+      "label": "156 classes \u00b7 K=40",
+      "ms": 146.7,
+      "fps": "6.8"
+    }
+  ],
+  "classification": [
+    {
+      "value": "73.7%",
+      "label": "REAL275 top-1"
+    },
+    {
+      "value": "76.5%",
+      "label": "SOPE top-1"
+    }
+  ]
+}
