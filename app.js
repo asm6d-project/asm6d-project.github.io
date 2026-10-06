@@ -78,6 +78,7 @@ function isAutoplayTarget(video){
 }
 
 function playMedia(video,{replay=false,manual=false}={}){
+  if(video.dataset.loading==='true')return Promise.resolve();
   if(manual){manuallyPaused.delete(video);manualPlaybackRoot=video.closest('.template-explorer')||video.closest('.media-button');}
   else if(manuallyPaused.has(video))return Promise.resolve();
   pauseOtherMedia(video);
@@ -106,12 +107,12 @@ function installKeys(group){
   });
 }
 
-function setVideo(video,src,poster){
+function setVideo(video,src,poster,{autoplay=true}={}){
   video.pause();video.removeAttribute('src');
   if(src)video.src=src;
   if(poster)video.poster=poster;
   video.load();
-  if(src&&!reducedMotion&&isAutoplayTarget(video))playMedia(video);
+  if(src&&autoplay&&!reducedMotion&&isAutoplayTarget(video))playMedia(video);
 }
 
 function buildTabs(group,items,onSelect,{previews=false}={}){
@@ -291,7 +292,7 @@ function setupFlowScrubber(){
 function setupFlowExamples(items){
   if(!items?.length)return;
   const video=$('#flow-video'),range=$('#flow-scrubber'),output=$('.flow-timeline output'),rgb=$('#flow-rgb'),depth=$('#flow-depth');
-  let requestId=0;
+  let requestId=0,loadEvents=null;
   const cachedSource=src=>{
     if(!flowVideoCache.has(src))flowVideoCache.set(src,fetch(src).then(response=>{if(!response.ok)throw new Error(`Flow media unavailable: ${src}`);return response.blob();}).then(blob=>URL.createObjectURL(blob)));
     return flowVideoCache.get(src);
@@ -299,29 +300,41 @@ function setupFlowExamples(items){
   buildTabs($('#flow-controls'),items,async item=>{
     const selected=++requestId;
     const progress=flowProgress;
+    loadEvents?.abort();loadEvents=new AbortController();
+    const signal=loadEvents.signal;
+    preserveFlowProgress=true;video.dataset.loading='true';
+    $('.flow-output').setAttribute('aria-busy','true');
     flowItem=item;showFlowPhase(progress);
     if(orbitEnabled)flowViewer.loadFlow(item).then(()=>showFlowPhase(flowProgress));
     rgb.src=item.inputs.rgb;depth.src=item.inputs.depth;
     rgb.alt=`RGB crop for the ${item.label.toLowerCase()} completion example`;
     depth.alt=`Metric depth crop for the ${item.label.toLowerCase()} completion example`;
-    video.dataset.source=item.src;video.pause();video.poster=item.poster;
-    const source=await cachedSource(item.src);
+    video.dataset.source=item.src;
+    // Clear the old decoded frame before updating the conditioning crop.
+    setVideo(video,null,item.poster,{autoplay:false});
+    let source;
+    try{source=await cachedSource(item.src);}catch{
+      if(selected===requestId){preserveFlowProgress=false;delete video.dataset.loading;$('.flow-output').setAttribute('aria-busy','false');}
+      return;
+    }
     if(selected!==requestId)return;
-    preserveFlowProgress=true;
-    const resume=()=>{if(selected!==requestId)return;preserveFlowProgress=false;if(!reducedMotion&&!orbitEnabled&&isAutoplayTarget(video))playMedia(video);};
+    let restoring=false;
+    const resume=()=>{if(selected!==requestId)return;preserveFlowProgress=false;delete video.dataset.loading;$('.flow-output').setAttribute('aria-busy','false');if(!reducedMotion&&!orbitEnabled&&isAutoplayTarget(video))playMedia(video);};
     const restore=()=>{
-      if(selected!==requestId)return;
+      if(selected!==requestId||restoring)return;
       if(!Number.isFinite(video.duration))return;
+      restoring=true;
+      const progress=flowProgress;
       video.pause();range.value=String(Math.round(progress*1000));
       showFlowPhase(progress);
       // A tiny nonzero seek clears the completed poster even when starting at t=1.
       const target=Math.max(.001,Math.min(progress*video.duration,video.duration-1/item.fps));
       if(video.readyState>=2&&Math.abs(video.currentTime-target)<.0001){resume();return;}
-      video.addEventListener('seeked',resume,{once:true});video.currentTime=target;
+      video.addEventListener('seeked',resume,{once:true,signal});video.currentTime=target;
     };
-    video.addEventListener('loadedmetadata',restore,{once:true});
-    video.addEventListener('canplay',()=>{if(preserveFlowProgress)restore();},{once:true});
-    setVideo(video,source,item.poster);
+    video.addEventListener('loadedmetadata',restore,{once:true,signal});
+    video.addEventListener('canplay',()=>{if(preserveFlowProgress)restore();},{once:true,signal});
+    setVideo(video,source,item.poster,{autoplay:false});
   });
   $('#flow-orbit').addEventListener('click',async event=>{
     orbitEnabled=!orbitEnabled;event.currentTarget.setAttribute('aria-pressed',String(orbitEnabled));event.currentTarget.textContent=orbitEnabled?'Animation':'Explore 3D';
