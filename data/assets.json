@@ -2,13 +2,13 @@
   "schemaVersion": 2,
   "main": {
     "available": true,
-    "src": "assets/video/main.mp4",
-    "poster": "assets/images/main-poster.webp",
+    "src": "assets/video/main-20261006-v2.mp4",
+    "poster": "assets/images/main-poster-20261006-v2.webp",
     "width": 1280,
     "height": 720,
     "fps": 30,
     "durationSeconds": 191.667,
-    "bytes": 9041502,
+    "bytes": 8715707,
     "encoding": {
       "codec": "H.264",
       "pixelFormat": "yuv420p",
